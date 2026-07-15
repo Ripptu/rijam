@@ -78,7 +78,7 @@ export function ProblemSection() {
                 ref={imageRef}
                 src="https://s1.directupload.eu/images/260714/nr4xlqrg.webp" 
                 alt="Energetische Begleitung & Klarheit" 
-                className="w-full h-full object-cover transition-opacity duration-700"
+                className="w-full h-full object-cover transition-opacity duration-700 sepia-[0.15] contrast-[1.05] brightness-95"
                 loading="lazy"
                 decoding="async"
                 referrerPolicy="no-referrer"

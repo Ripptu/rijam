@@ -42,9 +42,11 @@ export function ServicesSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           pin: true,
+          pinSpacing: true,
           scrub: 1,
           start: "top top",
           end: () => `+=${container.scrollWidth - window.innerWidth}`,
+          invalidateOnRefresh: true,
         }
       });
 

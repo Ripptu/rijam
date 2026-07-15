@@ -94,7 +94,7 @@ export function StatsCounter() {
       <div 
         className="bg-[#F7F4EF] rounded-[28px] md:rounded-[40px] p-6 md:p-10 border border-[#DB9C32]/15 shadow-[0_32px_80px_rgba(19,17,13,0.06)] backdrop-blur-sm"
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-[#13110D]/10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-4 lg:gap-0 lg:divide-x lg:divide-[#13110D]/10">
           
           {stats.map((stat, idx) => (
             <div 

@@ -21,7 +21,7 @@ export function AboutSection() {
               <img 
                 src="https://s1.directupload.eu/images/260714/vnxyq3np.webp" 
                 alt="Medium Rijam Portrait"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover sepia-[0.15] contrast-[1.05] brightness-95"
                 loading="lazy"
                 decoding="async"
               />
@@ -53,8 +53,8 @@ export function AboutSection() {
               Über Rijam
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-light mb-8 text-text-light">
-              Ein sicherer Raum für Ihre Seele.
+            <h2 className="text-4xl md:text-5xl font-light mb-8 text-text-light leading-[1.15]">
+              Ein erfahrener Begleiter, kein leeres Versprechen.
             </h2>
             
             <div className="space-y-6 text-text-light-muted text-lg font-light leading-relaxed mb-12">

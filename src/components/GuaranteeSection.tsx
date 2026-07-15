@@ -4,10 +4,10 @@ import { Check } from "lucide-react";
 
 export function GuaranteeSection() {
   const points = [
-    "100% vertrauliche Behandlung Ihrer Daten",
-    "Keine versteckten Kosten",
-    "Ehrliche Machbarkeitsprüfung",
-    "Persönliche Begleitung durch Medium Rijam"
+    "Kostenlose Erstanalyse",
+    "Zufriedenheits-/Geld-zurück-Garantie",
+    "Keine Vorkasse / keine versteckten Kosten",
+    "Diskret und vertraulich"
   ];
 
   return (

@@ -9,7 +9,7 @@
   --color-text-dark: #F7F4EF;
   --color-text-dark-muted: rgba(247, 244, 239, 0.7);
   --color-text-light: #13110D;
-  --color-text-light-muted: rgba(19, 17, 13, 0.7);
+  --color-text-light-muted: rgba(19, 17, 13, 0.85);
   --color-accent: #DB9C32;
   --color-accent-soft: #EFB653;
   --color-border-subtle-dark: rgba(247, 244, 239, 0.1);
@@ -38,21 +38,35 @@
 }
 
 @layer base {
+  html, body {
+    -webkit-overflow-scrolling: touch;
+  }
+  @media (max-width: 1023px) {
+    html, body {
+      height: auto !important;
+      scroll-behavior: auto !important;
+      overflow-y: auto !important;
+    }
+  }
+
   body {
     background-color: var(--color-bg-deep);
     color: var(--color-text-dark);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01" on, "cv11" on;
+    font-feature-settings: "ss01" on, "cv11" on, "lnum" 1, "tnum" 1;
+    font-variant-numeric: lining-nums tabular-nums;
     font-size: clamp(1.0625rem, 0.5vw + 0.9rem, 1.125rem); /* 17px to 18px */
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
   
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3, h4, h5, h6, .font-display {
     font-family: var(--font-display);
     font-variation-settings: "opsz" 72;
     letter-spacing: -0.02em;
     font-weight: 300; /* Never bold - Light/Regular */
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: "lnum" 1, "tnum" 1;
   }
   
   h1 {
@@ -81,5 +95,10 @@
   /* Additional text style utilities */
   .text-small {
     font-size: 0.875rem; /* 14px */
+  }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
   }
 }

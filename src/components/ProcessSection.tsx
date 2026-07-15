@@ -39,7 +39,7 @@ export function ProcessSection() {
 
         <div className="relative">
           {/* Connecting Line (Desktop) */}
-          <div className="hidden lg:block absolute top-[60px] left-[15%] right-[15%] h-[1px] bg-border-subtle-dark">
+          <div className="hidden lg:block absolute top-[60px] left-[15%] right-[15%] h-[1px] bg-border-subtle-light">
             <motion.div 
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
@@ -49,7 +49,18 @@ export function ProcessSection() {
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8">
+          {/* Connecting Line (Mobile) */}
+          <div className="lg:hidden absolute top-[60px] bottom-[60px] left-[45px] w-[1px] bg-border-subtle-light">
+            <motion.div 
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1.5, ease: easeApple, delay: 0.5 }}
+              className="w-full h-full bg-accent origin-top"
+            />
+          </div>
+
+          <div className="flex flex-col lg:grid lg:grid-cols-3 gap-12 lg:gap-8 relative z-10">
             {steps.map((step, i) => (
               <motion.div
                 key={step.number}
@@ -57,19 +68,21 @@ export function ProcessSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, ease: easeApple, delay: i * 0.2 }}
-                className="flex flex-col items-center text-center relative z-10"
+                className="flex flex-row lg:flex-col items-start lg:items-center text-left lg:text-center relative z-10 group"
               >
-                <div className="mb-8 bg-bg-dark relative">
+                <div className="mb-0 lg:mb-8 bg-bg-dark relative flex-shrink-0 w-[90px] lg:w-auto flex justify-center z-10">
                   {/* Outline Number */}
-                  <div className="font-display text-[100px] leading-none text-transparent" style={{ WebkitTextStroke: "1px var(--color-accent-soft)" }}>
+                  <div className="font-display text-[60px] lg:text-[100px] leading-none text-transparent transition-colors duration-500 group-hover:text-accent/10" style={{ WebkitTextStroke: "1px var(--color-accent-soft)" }}>
                     {step.number}
                   </div>
                 </div>
                 
-                <h3 className="text-2xl font-display font-light mb-4">{step.title}</h3>
-                <p className="text-text-light-muted font-light leading-relaxed max-w-sm">
-                  {step.text}
-                </p>
+                <div className="pt-2 lg:pt-0 pl-6 lg:pl-0">
+                  <h3 className="text-xl lg:text-2xl font-display font-light mb-2 lg:mb-4">{step.title}</h3>
+                  <p className="text-text-light-muted font-light leading-relaxed max-w-sm">
+                    {step.text}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>

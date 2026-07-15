@@ -54,7 +54,7 @@ export function TestimonialsSection() {
           <h2 className="text-4xl md:text-5xl font-light mb-6 text-text-light">Worte, die berühren.</h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 snap-x snap-mandatory hide-scrollbar -mx-6 px-6 md:mx-0 md:px-0 pb-8 md:pb-0">
           {testimonials.map((testimonial, i) => (
             <motion.div
               key={i}
@@ -62,7 +62,7 @@ export function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, ease: easeApple, delay: i * 0.1 }}
-              className="h-full"
+              className="snap-center shrink-0 w-[85vw] sm:w-[320px] md:w-auto h-full"
             >
               <TiltCard className="bg-bg-dark-2 rounded-2xl p-8 border border-black/5 flex flex-col h-full shadow-lg h-full">
                 <div className="font-display text-5xl text-accent opacity-50 mb-2 leading-none">"</div>

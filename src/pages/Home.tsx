@@ -28,24 +28,29 @@ export default function Home() {
   const isDesktop = useIsDesktopPointer();
 
   useEffect(() => {
-    // Check if we should initialize Lenis (only on desktop pointer)
-    const initLenis = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    
     let lenis: Lenis | null = null;
-    
-    if (initLenis) {
-      lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: "vertical",
-        gestureOrientation: "vertical",
-        smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 2,
-      });
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
 
-      lenis.on("scroll", ScrollTrigger.update);
-    }
+    const initLenis = () => {
+      if (mediaQuery.matches && !lenis) {
+        lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: "vertical",
+          gestureOrientation: "vertical",
+          smoothWheel: true,
+          wheelMultiplier: 1,
+          touchMultiplier: 2,
+        });
+
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add(tick);
+      } else if (!mediaQuery.matches && lenis) {
+        gsap.ticker.remove(tick);
+        lenis.destroy();
+        lenis = null;
+      }
+    };
 
     const tick = (time: number) => {
       if (lenis) {
@@ -53,10 +58,28 @@ export default function Home() {
       }
     };
 
-    gsap.ticker.add(tick);
+    // Initial check
+    initLenis();
+
+    // Listen for resize/orientation changes
+    const handleResize = () => {
+      initLenis();
+    };
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleResize);
+    } else {
+      mediaQuery.addListener(handleResize);
+    }
+
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener("change", handleResize);
+      } else {
+        mediaQuery.removeListener(handleResize);
+      }
       gsap.ticker.remove(tick);
       if (lenis) {
         lenis.destroy();

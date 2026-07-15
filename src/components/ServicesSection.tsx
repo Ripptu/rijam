@@ -32,7 +32,9 @@ export function ServicesSection() {
   ];
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1024px)", () => {
       const container = containerRef.current;
       if (!container) return;
       
@@ -50,13 +52,17 @@ export function ServicesSection() {
         x: () => -(container.scrollWidth - window.innerWidth + 100), // +100 for padding
         ease: "none"
       });
-    }, sectionRef);
+      
+      return () => {
+        // Cleanup if necessary
+      };
+    });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} id="leistungen" className="h-screen flex flex-col justify-center bg-bg-dark border-t border-black/5 overflow-hidden">
+    <section ref={sectionRef} id="leistungen" className="lg:h-screen flex flex-col justify-center bg-bg-dark border-t border-black/5 overflow-hidden py-24 lg:py-0">
       <div className="max-w-7xl px-6 md:px-12 w-full mx-auto mb-12 shrink-0">
         <div className="text-accent text-[10px] tracking-[0.2em] uppercase font-semibold mb-4">
           Expertise
@@ -66,12 +72,12 @@ export function ServicesSection() {
         </h2>
       </div>
 
-      <div className="flex w-full overflow-visible pl-6 md:pl-12 shrink-0">
-        <div ref={containerRef} className="flex gap-6 pb-8" style={{ width: "max-content" }}>
+      <div className="flex w-full overflow-x-auto lg:overflow-visible pl-6 md:pl-12 shrink-0 snap-x snap-mandatory hide-scrollbar">
+        <div ref={containerRef} className="flex gap-6 pb-8 lg:w-max w-[calc(100vw-3rem)]">
           {services.map((service, i) => (
             <div
               key={service.title}
-              className="group relative h-[450px] w-[320px] md:w-[400px] shrink-0 rounded-2xl overflow-hidden bg-gradient-to-br from-[#EBE6DF] to-[#DCD6CD] border border-black/5 shadow-[0_16px_40px_rgba(19,17,13,0.04)] flex flex-col justify-between p-8"
+              className="snap-center group relative h-[450px] w-[85vw] sm:w-[320px] md:w-[400px] shrink-0 rounded-2xl overflow-hidden bg-gradient-to-br from-[#EBE6DF] to-[#DCD6CD] border border-black/5 shadow-[0_16px_40px_rgba(19,17,13,0.04)] flex flex-col justify-between p-8"
             >
               {/* Elegant Gray Abstract Placeholder Pattern */}
               <div className="absolute inset-0 opacity-40 mix-blend-overlay pointer-events-none flex items-center justify-center">
@@ -89,14 +95,14 @@ export function ServicesSection() {
                 <span className="w-1.5 h-1.5 rounded-full bg-[#DB9C32]/60" />
               </div>
 
-              <div className="relative z-10 w-full transform transition-transform duration-500 ease-out group-hover:-translate-y-2">
+              <div className="relative z-10 w-full transform transition-transform duration-500 ease-out lg:group-hover:-translate-y-2">
                 <h3 className="text-2xl font-display text-[#13110D] font-light">{service.title}</h3>
                 <div className="h-[1px] w-0 bg-[#DB9C32] mt-4 transition-all duration-500 ease-out group-hover:w-12" />
               </div>
             </div>
           ))}
           {/* CTA Card inside the grid */}
-          <div className="group relative h-[450px] w-[320px] md:w-[400px] shrink-0 rounded-2xl overflow-hidden bg-bg-deep border border-black/5 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.4)] p-8 flex flex-col justify-between mr-24">
+          <div className="snap-center group relative h-[450px] w-[85vw] sm:w-[320px] md:w-[400px] shrink-0 rounded-2xl overflow-hidden bg-bg-deep border border-black/5 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.4)] p-8 flex flex-col justify-between mr-6 lg:mr-24">
             <div>
               <h3 className="text-2xl md:text-3xl font-display text-text-dark font-light mb-4">
                 Unsicher, was Ihnen hilft?

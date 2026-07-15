@@ -22,6 +22,8 @@ export function AboutSection() {
                 src="https://s1.directupload.eu/images/260714/vnxyq3np.webp" 
                 alt="Medium Rijam Portrait"
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             

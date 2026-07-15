@@ -12,7 +12,14 @@ export function ProblemSection() {
   const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+    
+    mm.add({
+      isDesktop: "(min-width: 1024px)",
+      isMobile: "(max-width: 1023px)"
+    }, (context) => {
+      const { isDesktop } = context.conditions as { isDesktop: boolean };
+      
       if (!imageContainerRef.current || !imageRef.current) return;
       gsap.to(imageRef.current, {
         scale: 1.08,
@@ -22,11 +29,12 @@ export function ProblemSection() {
           trigger: imageContainerRef.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: true,
+          scrub: isDesktop ? true : false,
         }
       });
-    }, containerRef);
-    return () => ctx.revert();
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (
@@ -72,6 +80,7 @@ export function ProblemSection() {
                 alt="Energetische Begleitung & Klarheit" 
                 className="w-full h-full object-cover transition-opacity duration-700"
                 loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/20 via-transparent to-transparent pointer-events-none" />

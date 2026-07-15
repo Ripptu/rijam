@@ -25,7 +25,8 @@ export function Hero() {
         <ProgressiveImage 
           src="https://s1.directupload.eu/images/260714/cfvqpsin.webp"
           alt="Spirituelles Ambiente"
-          className="w-full h-full object-cover animate-ken-burns"
+          className="w-full h-full object-cover md:animate-ken-burns motion-reduce:animate-none"
+          fetchPriority="high"
         />
       </div>
 

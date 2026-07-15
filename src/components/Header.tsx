@@ -29,13 +29,13 @@ export function Header() {
       <div 
         className={`w-full max-w-7xl mx-auto flex items-center justify-between transition-all duration-500 ease-out
         ${isScrolled 
-          ? "h-16 px-6 md:px-8 rounded-full border shadow-[0_8px_32px_rgba(0,0,0,0.05)] backdrop-blur-md" 
+          ? "h-16 px-6 md:px-8 rounded-full border shadow-[0_8px_32px_rgba(0,0,0,0.05)] backdrop-blur-[12px] motion-reduce:backdrop-blur-none" 
           : "h-32 px-6 md:px-12 bg-transparent border-transparent"
         }
         ${isScrolled && isLightSection
-          ? "bg-bg-dark/80 border-border-subtle-light text-text-light"
+          ? "bg-bg-dark/80 motion-reduce:bg-bg-dark border-border-subtle-light text-text-light"
           : isScrolled && !isLightSection
-          ? "bg-bg-deep/80 border-border-subtle-dark text-text-dark"
+          ? "bg-bg-deep/80 motion-reduce:bg-bg-deep border-border-subtle-dark text-text-dark"
           : "text-text-dark"
         }`}
       >
@@ -44,7 +44,9 @@ export function Header() {
             <img 
               src="https://s1.directupload.eu/images/260714/xe4swedl.png" 
               alt="Medium Rijam Logo" 
-              className={`w-auto transition-all duration-500 ease-out ${isScrolled ? "h-10" : "h-28"}`} 
+              className={`w-auto transition-all duration-500 ease-out ${isScrolled ? "h-10" : "h-28"}`}
+              loading="lazy"
+              decoding="async" 
             />
           </Link>
         </div>

@@ -1,9 +1,13 @@
 import { useEffect, useRef } from "react";
+import { useIsDesktopPointer } from "../hooks/useIsDesktopPointer";
 
 export function CursorGlow() {
   const glowRef = useRef<HTMLDivElement>(null);
+  const isDesktop = useIsDesktopPointer();
 
   useEffect(() => {
+    if (!isDesktop) return;
+
     const updateMousePosition = (e: MouseEvent) => {
       if (!glowRef.current) return;
       glowRef.current.style.setProperty("--mouse-x", `${e.clientX}px`);
@@ -15,7 +19,9 @@ export function CursorGlow() {
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
     };
-  }, []);
+  }, [isDesktop]);
+
+  if (!isDesktop) return null;
 
   return (
     <div

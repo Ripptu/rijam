@@ -1,4 +1,5 @@
 import React, { useRef, useState, MouseEvent } from "react";
+import { useIsDesktopPointer } from "../hooks/useIsDesktopPointer";
 
 interface TiltCardProps {
   children: React.ReactNode;
@@ -9,9 +10,10 @@ export function TiltCard({ children, className = "" }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [style, setStyle] = useState({});
   const [glareStyle, setGlareStyle] = useState({});
+  const isDesktop = useIsDesktopPointer();
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
+    if (!isDesktop || !cardRef.current) return;
     const { left, top, width, height } = cardRef.current.getBoundingClientRect();
     const x = e.clientX - left;
     const y = e.clientY - top;
@@ -35,6 +37,7 @@ export function TiltCard({ children, className = "" }: TiltCardProps) {
   };
 
   const handleMouseLeave = () => {
+    if (!isDesktop) return;
     setStyle({
       transform: `perspective(1000px) rotateX(0deg) rotateY(0deg)`,
       transition: "transform 0.5s ease-out"
@@ -44,6 +47,14 @@ export function TiltCard({ children, className = "" }: TiltCardProps) {
       transition: "opacity 0.5s ease-out"
     });
   };
+
+  if (!isDesktop) {
+    return (
+      <div className={`relative ${className}`}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <div
